@@ -9,7 +9,7 @@ function SelectedCountry ({selectedCountry}: SelectedCountryProps): JSX.Element 
     console.log(selectedCountry.name.common)
 
     return (
-        <h1>{selectedCountry.flag} {selectedCountry.name.common}!!!!! {selectedCountry.flag}</h1>
+        <p>{selectedCountry.flag} {selectedCountry.name.common}!!!!! {selectedCountry.flag}</p>
     )
 }
 

@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-// import React from 'react';
 import axios from 'axios';
 import Country from './models/Country';
 import Countries from './components/Countries';
@@ -39,6 +38,7 @@ function App() {
 
   return (
     <div className="App">
+      <h1>THE WHOLE WORLD</h1>
       <button onClick={handleClick}>RANDOM COUNTRY!</button>
       { selectedCountry && <SelectedCountry selectedCountry={selectedCountry}/> }
       <Countries countries={countries}/>
