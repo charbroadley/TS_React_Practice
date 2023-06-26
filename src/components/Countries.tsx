@@ -1,4 +1,5 @@
 import React from "react";
+import { v4 as getID } from "uuid";
 import Country from "../models/Country";
 
 interface CountriesProps {
@@ -7,15 +8,14 @@ interface CountriesProps {
 
 function Countries ({countries} : CountriesProps): JSX.Element {
     
-    console.log(countries)
+    const countryList = countries.map(country => (
+        <li key= {getID()}>{country.flag} {country.name.common} - Population: {country.population.toLocaleString('en-UK')}</li>
+    ))
 
     return(
         <>
-            <h1>Countries List</h1>
             <ul>
-                {countries.map(country => (
-                    <li key={country.population}>{country.name.common}</li>
-                ))}
+                {countryList}
             </ul>
         </>
     )
