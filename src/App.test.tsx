@@ -1,14 +1,10 @@
-import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent, waitFor, getByText } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import App from './App';
-import SelectedCountry from './components/SelectedCountry';
+import axois from 'axios'
+import MockAdapter from 'axios-mock-adapter'; // Or could use jest.mock()
 
-// test('renders learn react link', () => {
-//   render(<App />);
-//   const linkElement = screen.getByText(/learn react/i);
-//   expect(linkElement).toBeInTheDocument();
-// });
+const mock = new MockAdapter(axois)
 
 test('renders title text', () => {
   render(<App/>)
@@ -22,16 +18,37 @@ test('button has correct label', () => {
   expect(randomButton).toHaveTextContent('RANDOM COUNTRY!')
 })
 
-test('when button is clicked random country name renders', () => {
-  render(<App/>)
-  // Find the button
-  const randomButton: HTMLElement = screen.getByRole('button', {name: 'RANDOM COUNTRY!'})
-  // Click the button 
-  fireEvent.click(randomButton)
-  // Expect text to display 
-  const randomCountry: HTMLElement = screen.getByRole('paragraph')
-  expect(randomCountry).toBeInTheDocument()
-})
+test.only('when button is clicked random country name renders', async () => {
 
-// Need to render App to access button - need to render SelectedCountry to acces paragraph
+
+  mock.onGet("https://restcountries.com/v3.1/all")
+  .reply(200, [{
+    name: {
+      common: "Jordan"
+    }, 
+    flag: "🇯🇴",
+    population: 10203140
+  }])
+
+  axois.get("https://restcountries.com/v3.1/all")
+  .then(function (response) {
+    // console.log(response.data);
+  })
+
+  render(<App/>)
+  const randomButton: HTMLElement = screen.getByRole('button', {name: 'RANDOM COUNTRY!'})
+  expect(randomButton).toBeInTheDocument()
+
+  await waitFor(() => {
+      const t = screen.getByTestId('country-0')
+      expect(t).toBeInTheDocument()
+  }, { timeout: 4000 })
+
+  fireEvent.click(randomButton)
+
+  const country: HTMLElement = screen.getByTestId('randomCountry')
+  // console.log("country found in test", country)
+  expect(country).toBeVisible()
+  
+})
 

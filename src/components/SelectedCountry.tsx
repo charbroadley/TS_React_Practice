@@ -5,11 +5,8 @@ interface SelectedCountryProps {
 }
 
 function SelectedCountry ({selectedCountry}: SelectedCountryProps): JSX.Element {
-
-    console.log(selectedCountry.name.common)
-
     return (
-        <p>{selectedCountry.flag} {selectedCountry.name.common}!!!!! {selectedCountry.flag}</p>
+        <p data-testid="randomCountry" >{selectedCountry.flag} {selectedCountry.name.common}!!!!! {selectedCountry.flag}</p>
     )
 }
 

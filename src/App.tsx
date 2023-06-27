@@ -26,11 +26,9 @@ function App() {
     setSelectedCountry(chosenCountry)
   }
 
-  // To select a random country from the list, then update the list not to include the selected country
   const selectCountry = () => {
-    let randomNumber: number = Math.floor(Math.random()*250)
+    let randomNumber: number = Math.floor(Math.random()*countries.length)
     const randomCountry: Country = countries[randomNumber]
-    console.log("Random Country: ", randomCountry)
     const newCountriesList = countries.filter(country => country.name !== randomCountry.name)
     setCountries(newCountriesList)
     return randomCountry
