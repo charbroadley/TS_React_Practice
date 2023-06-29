@@ -5,13 +5,13 @@ interface CountriesProps {
     countries: Country[];
 }
 
-function Countries ({countries} : CountriesProps): JSX.Element {
-    
+function Countries({ countries }: CountriesProps): JSX.Element {
+
     const countryList = countries.map((country, index) => (
-        <li data-testid={`country-${index}`} key= {getID()}>{country.flag} {country.name.common} - Population: {country.population.toLocaleString('en-UK')}</li>
+        <li data-testid={`country-${index}`} key={getID()}>{country.flag} {country.name.common} - Population: {country.population.toLocaleString('en-UK')}</li>
     ))
 
-    return(
+    return (
         <>
             <ul>
                 {countryList}
